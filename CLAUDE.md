@@ -2,6 +2,17 @@
 
 This guide helps you use Claude Code to generate custom validations for your Duro library.
 
+## IMPORTANT: File Location
+
+**All validation files MUST be created in the `validations/` directory.**
+
+When creating a new validation, always use the path:
+```
+validations/your-validation-name.js
+```
+
+Example: `validations/reject-do-not-ship.js`
+
 ## Validation Structure
 
 All validations must follow this structure:
@@ -202,10 +213,11 @@ return {
 ## File Naming Convention
 
 The filename becomes the validation name:
-- `check-quantities.js` → "check-quantities"
-- `enforce-naming.js` → "enforce-naming"
+- `validations/check-quantities.js` → "check-quantities"
+- `validations/enforce-naming.js` → "enforce-naming"
 - Use lowercase with hyphens
 - Be descriptive but concise
+- **ALWAYS place files in the `validations/` directory**
 
 ## Remember
 
