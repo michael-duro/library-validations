@@ -200,6 +200,7 @@ async function syncValidations() {
           console.log(`   ✨ Creating: ${validation.name}`);
           await graphqlRequest(queries.createValidation, {
             input: {
+              libraryId: '', // Empty string - will be overridden by API key context
               name: validation.name,
               code: validation.code,
               description: validation.description,
