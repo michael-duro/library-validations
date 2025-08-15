@@ -16,6 +16,8 @@ Click "Use this template" on GitHub to create your own repository, or fork this 
    - Create a new secret named `DURO_LIBRARY_API_KEY`
    - Paste your API key value
 
+**Note**: The API key automatically provides library context - validations will be synced to the library associated with your API key.
+
 ### 3. Create Your First Validation
 
 Create a new JavaScript file in the `validations/` directory:
@@ -127,10 +129,11 @@ The filename (without `.js`) becomes the validation name:
 ## 🔄 How Syncing Works
 
 1. **On Push to Main**: GitHub Actions triggers the sync workflow
-2. **List Existing**: Fetches all current validations from your library
-3. **Compare**: Matches local files with existing validations by name
-4. **Upsert**: Updates existing validations or creates new ones
-5. **Activate**: All synced validations are set to active
+2. **Library Context**: Uses your API key to determine the target library
+3. **List Existing**: Fetches all current validations from your library
+4. **Compare**: Matches local files with existing validations by name
+5. **Upsert**: Updates existing validations or creates new ones
+6. **Activate**: All synced validations are set to active
 
 ## ⚙️ Validation Settings
 
