@@ -27,7 +27,7 @@ validations:
   - name: "example-validation"
     description: "Example validation showing basic structure"
     version: "1.0.0"
-    isActive: true
+    isActive: false
     onFailure: error
     path: validations/example-validation.js
 
