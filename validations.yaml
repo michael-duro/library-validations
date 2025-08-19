@@ -1,5 +1,5 @@
 # Duro Library Validations Configuration
-# 
+#
 # This file defines all validations that will be synced to your Duro library.
 # Each validation entry controls:
 #   - name: The unique identifier for the validation
@@ -16,20 +16,12 @@
 
 validations:
   # Example validation that checks for test phrases (WARNING mode)
-  - name: "warn-test-phrase"
+  - name: "Warn: Test Phrase"
     description: "Warns when 'test' appears in change order name or description"
     version: "1.0.0"
     isActive: true
     onFailure: warning
     path: validations/warn-test-phrase.js
-
-  # Example validation with basic structure
-  - name: "example-validation"
-    description: "Example validation showing basic structure"
-    version: "1.0.0"
-    isActive: false
-    onFailure: error
-    path: validations/example-validation.js
 
   # Validation that checks for revision sequence jumps
   - name: "Revision Sequence Check"
@@ -43,17 +35,10 @@ validations:
   - name: "AI Summary"
     description: "Provides an AI-generated summary of the change order via external service (informational only)"
     version: "1.0.0"
-    isActive: true
+    isActive: false
     onFailure: warning
     path: validations/ai-summary.js
 
-  # Validation that warns when there's only one component
-  - name: "single-component-warning"
-    description: "Warns when change order contains only one component"
-    version: "1.0.0"
-    isActive: true
-    onFailure: warning
-    path: validations/single-component-warning.js
 
   # Template for adding new validations:
   # - name: "validation-name"
