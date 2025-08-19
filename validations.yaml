@@ -47,6 +47,14 @@ validations:
     onFailure: warning
     path: validations/ai-summary.js
 
+  # Validation that warns when there's only one component
+  - name: "single-component-warning"
+    description: "Warns when change order contains only one component"
+    version: "1.0.0"
+    isActive: true
+    onFailure: warning
+    path: validations/single-component-warning.js
+
   # Template for adding new validations:
   # - name: "validation-name"
   #   description: "What this validation checks"
