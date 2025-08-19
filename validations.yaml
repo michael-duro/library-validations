@@ -39,6 +39,14 @@ validations:
     onFailure: warning
     path: validations/revision-sequence-check.js
 
+  # AI Summary validation that provides external analysis
+  - name: "AI Summary"
+    description: "Provides an AI-generated summary of the change order via external service (informational only)"
+    version: "1.0.0"
+    isActive: true
+    onFailure: warning
+    path: validations/ai-summary.js
+
   # Template for adding new validations:
   # - name: "validation-name"
   #   description: "What this validation checks"
