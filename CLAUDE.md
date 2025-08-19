@@ -16,7 +16,7 @@ Example workflow:
 ```yaml
 # In validations.yaml
 validations:
-  - name: "reject-do-not-ship"
+  - name: "Reject: Do Not Ship"
     description: "Blocks items marked as do-not-ship"
     version: "1.0.0"
     isActive: true
@@ -33,9 +33,9 @@ All validations must follow this structure:
 ```javascript
 exports.validate = async function(data) {
   const { change_order, components } = data;
-  
+
   // Your validation logic here
-  
+
   return {
     valid: boolean,        // true if validation passes, false if it fails
     message: string        // Explanation of the result
@@ -161,7 +161,7 @@ if (!pattern.test(change_order.name)) {
 ### Status Checks
 ```javascript
 // Verify component statuses
-const invalidStatuses = components.filter(c => 
+const invalidStatuses = components.filter(c =>
   !['approved', 'released'].includes(c.status)
 );
 if (invalidStatuses.length > 0) {
@@ -182,7 +182,7 @@ Blocks change order submission:
 onFailure: error  # Blocks submission
 ```
 
-### WARNING Mode  
+### WARNING Mode
 Shows warning but allows submission:
 ```yaml
 onFailure: warning  # Non-blocking
