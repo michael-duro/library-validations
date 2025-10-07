@@ -59,7 +59,7 @@ validations:
   - name: "the failure option"
     description: 'failure is always an option'
     version: "1.0.0"
-    isActive: true
+    isActive: false
     onFailure: error
     path: validations/auto-fail.js
 
