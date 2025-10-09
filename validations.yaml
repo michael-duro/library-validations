@@ -59,9 +59,9 @@ validations:
   - name: "the failure option"
     description: 'failure is always an option'
     version: "1.0.0"
-    isActive: false
+    isActive: true
     onFailure: error
-    path: validations/auto-fail.js
+    path: validations/description-fail.js
 
   # Template for adding new validations:
   # - name: "validation-name"
