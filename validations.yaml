@@ -63,6 +63,14 @@ validations:
     onFailure: error
     path: validations/description-fail.js
 
+  # Battery Recall Block
+  - name: "Block: Battery Recall"
+    description: "Blocks change orders containing battery components due to active recall from Acme Battery Co."
+    version: "1.0.0"
+    isActive: true
+    onFailure: error
+    path: validations/battery-recall-block.js
+
   # Template for adding new validations:
   # - name: "validation-name"
   #   description: "What this validation checks"
