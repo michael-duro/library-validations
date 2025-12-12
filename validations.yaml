@@ -71,12 +71,12 @@ validations:
     onFailure: error
     path: validations/battery-recall-block.js
 
-  # Capacitor Recall Block
-  - name: "Block: Capacitor Recall"
-    description: "Blocks change orders containing capacitor components due to active recall from Acme Co Resistor Corp."
+  # Capacitor Recall Warning
+  - name: "Warn: Capacitor Recall"
+    description: "Warns when change orders contain capacitor components due to recent recall from Acme Co Resistor Corp."
     version: "1.0.0"
     isActive: true
-    onFailure: error
+    onFailure: warning
     path: validations/capacitor-recall-block.js
 
   # Template for adding new validations:
