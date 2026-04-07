@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 
+# Local attribute reference (library-specific, regenerate with npm run list-attributes)
+attributes.json
+
 # Environment variables
 .env
 .env.local

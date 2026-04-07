@@ -229,6 +229,58 @@ Validations that exist in the API but not in `validations.yaml` will be:
 - Set to `isActive: false` (deactivated)
 - Never deleted (preserving history)
 
+## 🔍 Looking Up Attribute IDs
+
+Custom attributes in Duro are referenced by UUID in `attributeValues`. Use the `list-attributes` script to find the ID for any attribute in your library.
+
+### Setup
+
+Create a `.env.local` file in the repo root with your API key:
+
+```
+DURO_LIBRARY_API_KEY=your_api_key_here
+```
+
+### Run
+
+```bash
+npm run list-attributes
+```
+
+This fetches all attributes from your library, prints them to the console, and saves them to `attributes.json`:
+
+```
+Library: my-library (ec96c480-...)
+
+Saved 87 attribute(s) to attributes.json
+
+Name                           ID
+──────────────────────────────────────────────────────────────────────
+Capacitance                    7f6f1bf8-c7db-4d22-b990-39ed3286d84b
+Manufacturer Part Number       cc18585c-39e9-46dc-81c4-88f6a515d7c0
+Part Number                    91481e3f-b43d-48df-b802-239f1392aead
+...
+```
+
+Filter by name:
+
+```bash
+npm run list-attributes -- "part number"
+```
+
+### Referencing in Validations
+
+Use the ID from `attributes.json` to look up attribute values on a component:
+
+```javascript
+// attributes.json: { "name": "Part Number", "id": "91481e3f-b43d-48df-b802-239f1392aead" }
+const PART_NUMBER_ID = '91481e3f-b43d-48df-b802-239f1392aead';
+
+const partNumber = item.attributeValues?.[PART_NUMBER_ID]?.value;
+```
+
+Re-run `npm run list-attributes` any time you add new attributes to your library. The `attributes.json` file is excluded from git since IDs are library-specific.
+
 ## 🧪 Testing Locally
 
 Install dependencies and test your validations:

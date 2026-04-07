@@ -1,7 +1,14 @@
 validations:
+  - name: "Connector Pin Count Check"
+    description: "Blocks change orders containing connectors without a valid integer Pin Count"
+    version: "1.0.0"
+    isActive: true
+    onFailure: error
+    path: validations/connector-pin-count-check.js
+
   - name: "Capacitor Part Number Check"
     description: "Blocks change orders containing capacitors that are missing a Part Number attribute"
-    version: "1.0.3"
+    version: "1.0.4"
     isActive: true
     onFailure: error
     path: validations/capacitor-part-number-check.js

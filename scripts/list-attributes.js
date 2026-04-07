@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * Lists all category attributes and their IDs from your Duro library.
- * Usage: npm run list-attributes
- * Optional filter: npm run list-attributes -- capacitor
+ * Lists all attributes and their IDs from your Duro library, grouped by category.
+ * Usage:   npm run list-attributes
+ * Filter:  npm run list-attributes -- "part number"
  */
 
 const fs = require('fs');
@@ -29,11 +29,11 @@ if (!API_KEY) {
   process.exit(1);
 }
 
-const categoryFilter = process.argv[2]?.toLowerCase();
+const nameFilter = process.argv[2]?.toLowerCase();
 
-async function graphqlRequest(query, variables = {}) {
+async function graphqlRequest(query) {
   return new Promise((resolve, reject) => {
-    const data = JSON.stringify({ query, variables });
+    const data = JSON.stringify({ query });
     const options = {
       hostname: 'api.durohub.com',
       port: 443,
@@ -45,7 +45,6 @@ async function graphqlRequest(query, variables = {}) {
         'x-api-key': API_KEY
       }
     };
-
     const req = https.request(options, (res) => {
       let body = '';
       res.on('data', chunk => body += chunk);
@@ -59,7 +58,6 @@ async function graphqlRequest(query, variables = {}) {
         }
       });
     });
-
     req.on('error', e => reject(e));
     req.write(data);
     req.end();
@@ -67,39 +65,53 @@ async function graphqlRequest(query, variables = {}) {
 }
 
 async function main() {
-  console.log('Fetching category attributes from Duro library...\n');
+  console.log('Fetching attributes from Duro library...\n');
 
+  // Step 1: get libraryId from the API key context
+  const libData = await graphqlRequest(`query { library { current { id name } } }`);
+  const libraryId = libData.library.current.id;
+  console.log(`Library: ${libData.library.current.name} (${libraryId})\n`);
+
+  // Step 2: fetch all attributes for this library
   const data = await graphqlRequest(`
-    query ListAttributes {
+    query {
       attribute {
-        list {
-          edges {
-            node {
-              id
-              name
-            }
-          }
+        findAll(libraryId: "${libraryId}") {
+          id
+          name
         }
       }
     }
   `);
 
-  const attrs = data.attribute.list.edges.map(e => e.node);
+  const attrs = data.attribute.findAll.sort((a, b) => a.name.localeCompare(b.name));
 
-  const filtered = categoryFilter
-    ? attrs.filter(a => a.name.toLowerCase().includes(categoryFilter))
+  // Save full list to attributes.json
+  const outputPath = path.join(__dirname, '..', 'attributes.json');
+  const json = {
+    library: { id: libraryId, name: libData.library.current.name },
+    generatedAt: new Date().toISOString(),
+    attributes: attrs.map(a => ({ name: a.name, id: a.id }))
+  };
+  fs.writeFileSync(outputPath, JSON.stringify(json, null, 2));
+  console.log(`Saved ${attrs.length} attribute(s) to attributes.json\n`);
+
+  // Print to console (filtered or full)
+  const display = nameFilter
+    ? attrs.filter(a => a.name.toLowerCase().includes(nameFilter))
     : attrs;
 
-  if (filtered.length === 0) {
-    console.log(categoryFilter ? `No attributes matching "${categoryFilter}"` : 'No attributes found.');
+  if (display.length === 0) {
+    console.log(`No attributes matching "${nameFilter}"`);
     return;
   }
 
   console.log('Name                           ID');
   console.log('─'.repeat(70));
-  for (const attr of filtered.sort((a, b) => a.name.localeCompare(b.name))) {
+  for (const attr of display) {
     console.log(`${attr.name.padEnd(31)}${attr.id}`);
   }
+  if (!nameFilter) console.log(`\nTotal: ${attrs.length} attribute(s)`);
 }
 
 main().catch(err => {
