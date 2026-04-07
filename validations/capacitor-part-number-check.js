@@ -12,6 +12,12 @@ exports.validate = async function(data) {
 
   console.info(`Found ${capacitors.length} capacitor(s) in this change order`);
 
+  // Debug: log attribute keys for the first capacitor
+  if (capacitors.length > 0) {
+    const keys = Object.keys(capacitors[0].attributeValues || {});
+    console.info(`Attribute keys on first capacitor: ${JSON.stringify(keys)}`);
+  }
+
   const missing = capacitors.filter(item => {
     const partNumber = item.attributeValues?.['Part Number'];
     return !partNumber || String(partNumber).trim() === '';
