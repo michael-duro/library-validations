@@ -6,7 +6,8 @@
   "scripts": {
     "sync": "node scripts/sync-validations.js",
     "test": "node scripts/test-validation.js",
-    "validate": "node scripts/validate-syntax.js"
+    "validate": "node scripts/validate-syntax.js",
+    "list-attributes": "node scripts/list-attributes.js"
   },
   "keywords": [
     "duro",

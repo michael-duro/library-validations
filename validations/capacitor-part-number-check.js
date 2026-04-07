@@ -12,14 +12,10 @@ exports.validate = async function(data) {
 
   console.info(`Found ${capacitors.length} capacitor(s) in this change order`);
 
-  // Debug: log attribute keys for the first capacitor
-  if (capacitors.length > 0) {
-    const keys = Object.keys(capacitors[0].attributeValues || {});
-    console.info(`Attribute keys on first capacitor: ${JSON.stringify(keys)}`);
-  }
+  const PART_NUMBER_ATTR_ID = '91481e3f-b43d-48df-b802-239f1392aead';
 
   const missing = capacitors.filter(item => {
-    const partNumber = item.attributeValues?.['Part Number'];
+    const partNumber = item.attributeValues?.[PART_NUMBER_ATTR_ID];
     return !partNumber || String(partNumber).trim() === '';
   });
 
