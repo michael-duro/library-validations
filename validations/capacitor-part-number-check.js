@@ -12,6 +12,11 @@ exports.validate = async function(data) {
 
   console.info(`Found ${capacitors.length} capacitor(s) in this change order`);
 
+  // Debug: log full attributeValues for the first capacitor
+  if (capacitors.length > 0) {
+    console.info(`attributeValues: ${JSON.stringify(capacitors[0].attributeValues, null, 2)}`);
+  }
+
   const PART_NUMBER_ATTR_ID = '91481e3f-b43d-48df-b802-239f1392aead';
 
   const missing = capacitors.filter(item => {

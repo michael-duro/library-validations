@@ -1,7 +1,7 @@
 validations:
   - name: "Capacitor Part Number Check"
     description: "Blocks change orders containing capacitors that are missing a Part Number attribute"
-    version: "1.0.2"
+    version: "1.0.3"
     isActive: true
     onFailure: error
     path: validations/capacitor-part-number-check.js
