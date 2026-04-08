@@ -1,10 +1,10 @@
 validations:
-  - name: "require-passive-part-number"
-    description: "Ensures passive components (capacitor, resistor, diode) have a Part Number"
+  - name: "passive-component-part-number"
+    description: "Requires all passive components (capacitor, resistor, diode, inductor, transformer) to have a Part Number attribute"
     version: "1.0.0"
     isActive: true
     onFailure: error
-    path: validations/require-passive-part-number.js
+    path: validations/passive-component-part-number.js
 
 # Add validations above. Each entry requires:
 #   name:        Unique identifier shown in Duro UI
