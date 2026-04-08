@@ -1,16 +1,18 @@
-validations:
-  # Add your validations here. Each entry requires:
-  #   name:        Unique identifier shown in Duro UI
-  #   description: Human-readable description of what the validation checks
-  #   version:     Semantic version (increment when making changes)
-  #   isActive:    true to enable, false to disable
-  #   onFailure:   "error" blocks submission, "warning" is non-blocking
-  #   path:        Path to the JavaScript file (relative to repo root)
-  #
-  # Example:
-  # - name: "My Validation"
-  #   description: "What this checks"
-  #   version: "1.0.0"
-  #   isActive: true
-  #   onFailure: error
-  #   path: validations/my-validation.js
+validations: []
+
+# Add validations above. Each entry requires:
+#   name:        Unique identifier shown in Duro UI
+#   description: Human-readable description of what the validation checks
+#   version:     Semantic version (increment when making changes)
+#   isActive:    true to enable, false to disable
+#   onFailure:   "error" blocks submission, "warning" is non-blocking
+#   path:        Path to the JavaScript file (relative to repo root)
+#
+# Example:
+# validations:
+#   - name: "My Validation"
+#     description: "What this checks"
+#     version: "1.0.0"
+#     isActive: true
+#     onFailure: error
+#     path: validations/my-validation.js
